@@ -1,56 +1,120 @@
-# Welcome to your Expo app 👋
+# Manage Expenses 💳
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A full-featured, cross-platform personal finance & expense tracking application built with **React Native**, **Expo Router**, and **TypeScript**.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Features
 
-   ```bash
-   npm install
-   ```
+- **📊 Comprehensive Financial Dashboard**
+  - Real-time Net Balance calculation.
+  - Income vs. Expense monthly split cards with percentage savings rate badge.
+  - Monthly budget utilization progress bar.
+  - Top category spending pills.
+  - Recent transactions list with one-tap detail views.
 
-2. Start the app
+- **📑 Searchable & Filterable Transactions**
+  - Instant search across titles, notes, and payees.
+  - Type toggle: All, Expenses Only, Income Only.
+  - Horizontal category filtering pills (Food, Shopping, Housing, Transport, Bills, etc.).
+  - Multi-criteria sorting (Newest first, Highest amount, Lowest amount).
+  - Summary count and net totals of filtered views.
 
-   ```bash
-   npx expo start
-   ```
+- **📈 Visual Analytics & Insights**
+  - Monthly cashflow visual comparison bar.
+  - 4-metric summary grid (Savings Rate, Daily Average, Net Saved, Peak Expense).
+  - Categorized spending breakdown with percentage progress bars.
+  - Automated smart spending insights based on user transactions.
 
-In the output, you'll find options to open the app in a
+- **🎯 Category Budget Management**
+  - Overall monthly budget limit vs. current spend with dynamic warning indicators.
+  - Per-category spending caps with color-coded utilization:
+    - 🟢 Safe (< 80%)
+    - 🟡 Warning (80% - 99%)
+    - 🔴 Exceeded (≥ 100%)
+  - Custom budget limits editor for all expense categories.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **➕ Add & Manage Transactions**
+  - Quick amount increment chips (+10, +25, +50, +100, +500).
+  - Expense vs. Income type toggling.
+  - Visual category grid with custom icons and color tokens.
+  - Payment method tagging (Credit Card, Debit Card, UPI, Bank Transfer, Cash).
+  - Date and notes management.
+  - Transaction detail view with confirmation-prompted deletion.
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **⚙️ Settings & Device Persistence**
+  - Currency switcher (USD `$`, EUR `€`, GBP `£`, INR `₹`, JPY `¥`, CAD `C$`, AUD `A$`).
+  - Offline-first local storage powered by `@react-native-async-storage/async-storage`.
+  - Realistic demo data preloaded out of the box with one-tap restore option.
+  - Complete data wipe option.
+  - Responsive dark/light theme support.
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🏗️ Architecture & Project Structure
 
-```bash
-npm run reset-project
+```
+manage-expenses/
+├── assets/                       # Icons, adaptive icons, and splash screens
+├── src/
+│   ├── app/                      # Expo Router (file-based routing)
+│   │   ├── _layout.tsx           # Root layout with Stack & ThemeProvider
+│   │   ├── (tabs)/               # Bottom tab navigator
+│   │   │   ├── _layout.tsx       # Bottom tabs navigation config
+│   │   │   ├── index.tsx         # Dashboard / Home Screen
+│   │   │   ├── transactions.tsx  # Transactions screen with search & filters
+│   │   │   ├── analytics.tsx     # Visual analytics & insights screen
+│   │   │   └── budgets.tsx       # Category budget utilization screen
+│   │   ├── add-modal.tsx         # Modal to add income or expense
+│   │   ├── transaction-detail.tsx# Modal to view and delete transaction
+│   │   ├── budget-modal.tsx      # Modal to adjust category spending limits
+│   │   └── settings-modal.tsx    # Modal to change currency & manage data
+│   ├── components/               # Reusable UI components
+│   │   ├── BalanceHero.tsx       # Net balance and cashflow cards
+│   │   ├── CategoryIcon.tsx      # Lucide icons for categories and payment methods
+│   │   ├── ProgressBar.tsx       # Custom rounded progress bar
+│   │   └── TransactionCard.tsx   # Polished transaction row item
+│   ├── constants/
+│   │   └── theme.ts              # Design system colors, spacing, and font tokens
+│   ├── context/
+│   │   └── ExpenseContext.tsx    # Global state management and AsyncStorage sync
+│   ├── data/
+│   │   └── demoData.ts           # Initial sample transactions and budgets
+│   └── types/
+│       └── expense.ts            # TypeScript interfaces and category definitions
+├── app.json                      # Expo project configuration
+├── package.json                  # Dependencies & run scripts
+└── tsconfig.json                 # TypeScript strict compiler config
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+---
 
-### Other setup steps
+## 🚀 Getting Started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### 1. Install Dependencies
+```bash
+cd manage-expenses
+npm install
+```
 
-## Learn more
+### 2. Run the App
 
-To learn more about developing your project with Expo, look at the following resources:
+- **Run in Web Browser**:
+  ```bash
+  npm run web
+  ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **Run on Android**:
+  ```bash
+  npm run android
+  ```
 
-## Join the community
+- **Run on iOS** *(macOS required)*:
+  ```bash
+  npm run ios
+  ```
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **Start Expo Metro Bundler**:
+  ```bash
+  npx expo start
+  ```
